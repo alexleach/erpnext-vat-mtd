@@ -135,4 +135,12 @@ app_license = "GPL3"
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
-fixtures = ["Custom Field"]
+fixtures = [
+	{
+		"dt": "Custom Field",
+		"filters": [
+			["module", "=", "UK VAT Return"]
+		]
+	},
+]
+
