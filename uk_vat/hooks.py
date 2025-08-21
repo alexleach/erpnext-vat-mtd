@@ -135,6 +135,9 @@ app_license = "GPL3"
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
+# Automatically update python controller files with type annotations for this app.
+export_python_type_annotations = True
+
 fixtures = [
 	{
 		"dt": "Custom Field",

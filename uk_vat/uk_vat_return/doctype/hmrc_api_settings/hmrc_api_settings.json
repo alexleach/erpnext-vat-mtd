@@ -37,7 +37,7 @@
   },
   {
    "fieldname": "client_secret",
-   "fieldtype": "Data",
+   "fieldtype": "Password",
    "label": "Client Secret"
   },
   {
@@ -84,7 +84,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-04-14 18:37:58.394446",
+ "modified": "2025-08-20 07:15:55.923126",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "HMRC API Settings",
@@ -102,6 +102,8 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

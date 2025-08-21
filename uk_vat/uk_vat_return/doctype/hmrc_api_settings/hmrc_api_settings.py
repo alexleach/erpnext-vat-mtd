@@ -11,6 +11,22 @@ import requests_oauthlib as ro
 from oauthlib.oauth2 import BackendApplicationClient 
 
 class HMRCAPISettings(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		api_base: DF.Data | None
+		auth_base: DF.Data | None
+		client_id: DF.Data | None
+		client_secret: DF.Password | None
+		enable: DF.Check
+		gov_ip_headers: DF.Check
+		installation_guid: DF.Data | None
+	# end: auto-generated types
 
 	def before_save(self):
 

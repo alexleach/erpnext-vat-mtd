@@ -15,8 +15,7 @@
   "authorised_services",
   "last_authorised_date",
   "oauth_token",
-  "oauth_state",
-  "read_only_11"
+  "oauth_state"
  ],
  "fields": [
   {
@@ -33,13 +32,6 @@
    "fieldname": "authorisations_requested_section",
    "fieldtype": "Section Break",
    "label": "Authorisations Requested"
-  },
-  {
-   "default": "1",
-   "description": "Selecting this will request authorisation from HMRC to retrieve information about, and to submit, your company VAT returns using this software.",
-   "fieldname": "is_vat",
-   "fieldtype": "Check",
-   "label": "VAT (MTD)"
   },
   {
    "fieldname": "authorisation_status_section",
@@ -86,15 +78,19 @@
    "read_only": 1
   },
   {
-   "fieldname": "read_only_11",
-   "fieldtype": "Read Only"
+   "default": "1",
+   "description": "Selecting this will request authorisation from HMRC to retrieve information about, and to submit, your company VAT returns using this software.",
+   "fieldname": "is_vat",
+   "fieldtype": "Check",
+   "label": "VAT (MTD)"
   }
  ],
  "links": [],
- "modified": "2020-04-12 08:02:28.516141",
+ "modified": "2025-08-20 06:32:08.846501",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "HMRC Authorisations",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -110,6 +106,8 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }
