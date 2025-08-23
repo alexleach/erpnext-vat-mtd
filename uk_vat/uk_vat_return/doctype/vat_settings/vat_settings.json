@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:company",
+ "creation": "2025-08-21 12:22:15.571628",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company_settings_section",
+  "company",
+  "return_frequency",
+  "default_purchase_tax_template",
+  "default_sales_tax_template",
+  "column_break_ekur",
+  "country",
+  "vat_reg_no",
+  "portal_api",
+  "section_break_xidp",
+  "vat_rate_definitions",
+  "section_break_yslw",
+  "vat_account_mappings",
+  "section_break_qoau",
+  "place_of_supply_rules"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "unique": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Country",
+   "options": "=frappe.get_doc(\"Company\", doc.company).country"
+  },
+  {
+   "fieldname": "company_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Company Settings"
+  },
+  {
+   "fieldname": "return_frequency",
+   "fieldtype": "Select",
+   "label": "Return Frequency",
+   "options": "Monthly\nQuarterly\nYearly"
+  },
+  {
+   "fieldname": "default_purchase_tax_template",
+   "fieldtype": "Link",
+   "label": "Default Purchase Tax Template",
+   "link_filters": "[\n [\n   \"_\",\n   \"company\",\n   \"=\",\n   \"eval:doc.company\"\n ],\n [\n   \"_\",\n   \"disabled\",\n   \"=\",\n   \"0\"\n ]\n]",
+   "options": "Purchase Taxes and Charges Template"
+  },
+  {
+   "fieldname": "default_sales_tax_template",
+   "fieldtype": "Link",
+   "label": "Default Sales Tax Template",
+   "link_filters": "[\n [\n   \"_\",\n   \"company\",\n   \"=\",\n   \"eval:doc.company\"\n ],\n [\n   \"_\",\n   \"disabled\",\n   \"=\",\n   \"0\"\n ]\n]",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "column_break_ekur",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vat_reg_no",
+   "fieldtype": "Data",
+   "label": "VAT Registration Number"
+  },
+  {
+   "fieldname": "portal_api",
+   "fieldtype": "Select",
+   "label": "Portal API",
+   "options": "None\nUK MTD\nEstonia e-MTA"
+  },
+  {
+   "fieldname": "section_break_xidp",
+   "fieldtype": "Section Break",
+   "label": "VAT Rates"
+  },
+  {
+   "fieldname": "vat_rate_definitions",
+   "fieldtype": "Table",
+   "label": "VAT Rate Definitions",
+   "options": "VAT Rate Definitions"
+  },
+  {
+   "fieldname": "vat_account_mappings",
+   "fieldtype": "Table",
+   "label": "VAT Account Mappings",
+   "options": "VAT Account Mappings"
+  },
+  {
+   "fieldname": "place_of_supply_rules",
+   "fieldtype": "Table",
+   "label": "Place of Supply Rules (Optional)",
+   "options": "Place of Supply Rules"
+  },
+  {
+   "fieldname": "section_break_yslw",
+   "fieldtype": "Section Break",
+   "label": "Accounts -> Return Boxes / Lines"
+  },
+  {
+   "fieldname": "section_break_qoau",
+   "fieldtype": "Section Break",
+   "label": "Place of Supply"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-08-22 06:12:57.393706",
+ "modified_by": "Administrator",
+ "module": "UK VAT Return",
+ "name": "VAT Settings",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

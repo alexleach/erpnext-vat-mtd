@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-22 05:58:23.751432",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "counterparty_region",
+  "vat_id_required",
+  "treatment",
+  "preferred_sales_tax_template",
+  "preferred_purchase_tax_template"
+ ],
+ "fields": [
+  {
+   "fieldname": "counterparty_region",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Counterparty Region",
+   "options": "Domestic\nEU\nNon-EU"
+  },
+  {
+   "default": "0",
+   "fieldname": "vat_id_required",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "VAT ID Required?"
+  },
+  {
+   "fieldname": "treatment",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Treatment",
+   "options": "Standard\nReverse Charge\nZero\nExempt\nOut-of-Scope"
+  },
+  {
+   "fieldname": "preferred_sales_tax_template",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Preferred Sales Tax Template",
+   "link_filters": "[\n [\n   \"_\",\n   \"company\",\n   \"=\",\n   \"eval:parent.company\"\n ],\n [\n   \"_\",\n   \"disabled\",\n   \"=\",\n   \"0\"\n ]\n]",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "preferred_purchase_tax_template",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Preferred Purchase Tax Template",
+   "link_filters": "[\n [\n   \"_\",\n   \"company\",\n   \"=\",\n   \"eval:parent.company\"\n ],\n [\n   \"_\",\n   \"disabled\",\n   \"=\",\n   \"0\"\n ]\n]",
+   "options": "Purchase Taxes and Charges Template"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-22 06:12:17.982947",
+ "modified_by": "Administrator",
+ "module": "UK VAT Return",
+ "name": "Place of Supply Rules",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
