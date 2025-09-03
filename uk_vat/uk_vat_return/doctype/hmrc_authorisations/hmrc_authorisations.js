@@ -5,8 +5,9 @@ frappe.ui.form.on('HMRC Authorisations', {
 
 	request_authorisations: function(frm) {
 
-		frappe.call({
-			method: "uk_vat.uk_vat_return.doctype.hmrc_authorisations.hmrc_authorisations.authorize_access",
+		frm.call({
+			method: "authorize_access",
+			doc: frm.doc,
 			args: {
 				name : frm.doc.name,
 			},

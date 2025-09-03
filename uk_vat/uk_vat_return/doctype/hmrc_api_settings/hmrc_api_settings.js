@@ -5,12 +5,10 @@ frappe.ui.form.on('HMRC API Settings', {
 	refresh: function(frm) {
 
 		frm.add_custom_button(__('Test HMRC Connectivity'), function() {
-			frappe.call({
-				"method" : "uk_vat.uk_vat_return.doctype.hmrc_api_settings.hmrc_api_settings.test_api",
-				"args" : {
-					name : frm.doc.name,
-				},
-				"callback" : function(r){
+			frm.call({
+				method : "test_api",
+				doc: frm.doc,
+				callback : function(r){
 					frappe.msgprint("HMRC connectivity test success!");
 				}
 			});

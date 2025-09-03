@@ -5,9 +5,11 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "enable",
+  "connected_application_section",
+  "connected_app",
   "oauth2_client_identifier_section",
   "client_id",
+  "column_break_yaha",
   "client_secret",
   "fraud_prevention_section_header",
   "gov_ip_headers",
@@ -18,26 +20,22 @@
  ],
  "fields": [
   {
-   "default": "0",
-   "fieldname": "enable",
-   "fieldtype": "Check",
-   "label": "Enable"
-  },
-  {
    "depends_on": "enable",
+   "description": "These are the Client ID and Secret received from the HMRC developer API team. It is not your government gateway identifier. Register your server application at https://developer.service.hmrc.gov.uk/developer/applications",
    "fieldname": "oauth2_client_identifier_section",
    "fieldtype": "Section Break",
    "label": "OAUTH2 Client Identifier"
   },
   {
-   "description": "This is the Client ID received from the HMRC developer API team. It is not your government gateway identifier.",
    "fieldname": "client_id",
    "fieldtype": "Data",
+   "is_virtual": 1,
    "label": "Client Id"
   },
   {
    "fieldname": "client_secret",
    "fieldtype": "Password",
+   "is_virtual": 1,
    "label": "Client Secret"
   },
   {
@@ -70,21 +68,37 @@
   },
   {
    "default": "0",
-   "description": "For proper operation, you need to enable this and then provide the following HTTP headers to this application: Gov-Client-Public-IP, Gov-Client-Public-IP-Timestamp, Gov-Client-Public-Port, Gov-Vendor-Public-IP, Gov-Vendor-Forwarded. The spec for these headers is here: https://developer.service.hmrc.gov.uk/guides/fraud-prevention/connection-method/web-app-via-server/\n\nIf this is disabled, this app won't submit these headers to the HMRC API.",
    "fieldname": "gov_ip_headers",
    "fieldtype": "Check",
    "label": "GOV IP Headers"
   },
   {
+   "description": "For proper operation, you need to enable this and then provide the following HTTP headers to this application: Gov-Client-Public-IP, Gov-Client-Public-IP-Timestamp, Gov-Client-Public-Port, Gov-Vendor-Public-IP, Gov-Vendor-Forwarded. The spec for these headers is here: https://developer.service.hmrc.gov.uk/guides/fraud-prevention/connection-method/web-app-via-server/\n\nIf this is disabled, this app won't submit these headers to the HMRC API.",
    "fieldname": "fraud_prevention_section_header",
    "fieldtype": "Section Break",
    "label": "HMRC Fraud Prevention Headers"
+  },
+  {
+   "fieldname": "column_break_yaha",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "connected_app",
+   "fieldtype": "Link",
+   "label": "Application",
+   "options": "Connected App"
+  },
+  {
+   "description": "Created a Connected Application, enter the Client ID and Client Secret, and we will fill out the rest of the details.",
+   "fieldname": "connected_application_section",
+   "fieldtype": "Section Break",
+   "label": "Connected Application"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-20 07:15:55.923126",
+ "modified": "2025-08-30 07:24:01.451303",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "HMRC API Settings",

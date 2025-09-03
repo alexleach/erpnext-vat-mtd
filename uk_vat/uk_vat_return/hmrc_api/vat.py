@@ -2,19 +2,13 @@
 # Copyright (c) 2020 Software to Hardware Ltd. and contributors
 # For license information, please see license.txt
 
-import platform
-import hashlib
 import frappe
-from uk_vat.uk_vat_return.doctype.hmrc_authorisations.hmrc_authorisations import get_session
+from frappe.utils import get_link_to_form
 from .fraud_prevention import get_fraud_prevention_headers
 
 accept_header = { "Accept": "application/vnd.hmrc.1.0+json" }
 
 def is_company_vat_enabled(company):
-
-    if not frappe.db.get_single_value("HMRC API Settings", "enable"):
-        return false
-
     enabled_count = frappe.db.sql("""
                 select count(name) `tabHMRC Authorisations` a
                 where
@@ -26,8 +20,11 @@ def is_company_vat_enabled(company):
 
 def get_vrn(company):
     tax_id = frappe.db.get_value("Company", company, "tax_id")
+    if not tax_id:
+        link = get_link_to_form("Company", company)
+        frappe.throw(f"Please set the Tax ID for company {link}.")
     if not tax_id.upper().startswith("GB"):
-        frappe.throw("Company Tax ID setting is invalid. Should be GB followed by 9 digits.")
+        frappe.throw("Company Tax ID is invalid. Should be GB followed by 9 digits.")
     return tax_id[2:]
 
 def get_open_obligations(company):
@@ -63,3 +60,12 @@ def fraud_prevention_header_feedback(company):
         api_base+"/test/fraud-prevention-headers/vat-mtd/validation-feedback",
         headers=accept_header)
     return response.json()
+
+def get_session(company: str):
+	apps = frappe.get_list("Connected App", filters={"provider_name": "UK VAT (MTD)"})
+	if apps:
+		app = frappe.get_doc("Connected App", apps[0].name)
+		return app.get_oauth2_session(frappe.session.user)
+	else:
+		frappe.throw("No connected app found for UK VAT (MTD)")
+	return
