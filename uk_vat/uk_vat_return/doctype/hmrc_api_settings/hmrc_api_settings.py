@@ -16,18 +16,27 @@ class HMRCAPISettings(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		api_base: DF.Data | None
-		auth_base: DF.Data | None
-		connected_app: DF.Link | None
+		connected_app: DF.Link
 		gov_ip_headers: DF.Check
 		installation_guid: DF.Data | None
+		is_sandbox_app: DF.Check
 	# end: auto-generated types
 
 	def before_save(self):
-
 		# Generate installation guid for HMRC API
 		if self.installation_guid is None or len(self.installation_guid) < 5:
 			self.installation_guid = str(uuid.uuid4())
+
+	def validate(self):
+		"""Check that the Connected App's settings are correct"""
+		app = frappe.get_doc("Connected App", self.connected_app)
+		app.scopes = [{"scope": "read:vat"}, {"scope": "write:vat"}]
+		domain = "api.service.hmrc.gov.uk"
+		if self.is_sandbox_app:
+			domain = "test-" + domain
+		app.authorisation_url = f"https://{domain}/oauth/authorize"
+		app.token_uri = f"https://{domain}/oauth/token"
+		app.save()
 
 	@frappe.whitelist()
 	def test_api(self):

@@ -62,10 +62,8 @@ def fraud_prevention_header_feedback(company):
     return response.json()
 
 def get_session(company: str):
-	apps = frappe.get_list("Connected App", filters={"provider_name": "UK VAT (MTD)"})
-	if apps:
-		app = frappe.get_doc("Connected App", apps[0].name)
-		return app.get_oauth2_session(frappe.session.user)
-	else:
-		frappe.throw("No connected app found for UK VAT (MTD)")
-	return
+    app_name = frappe.get_single_value("HMRC API Settings", "connected_app")
+    if not app_name:
+        frappe.throw("No Connected App configured in HMRC API Settings")
+    app = frappe.get_doc("Connected App", app_name)
+    return app.get_oauth2_session(frappe.session.user)

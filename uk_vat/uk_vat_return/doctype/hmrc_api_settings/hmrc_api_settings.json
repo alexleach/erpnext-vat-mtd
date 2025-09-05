@@ -7,6 +7,8 @@
  "field_order": [
   "connected_application_section",
   "connected_app",
+  "column_break_kxws",
+  "is_sandbox_app",
   "oauth2_client_identifier_section",
   "client_id",
   "column_break_yaha",
@@ -14,8 +16,6 @@
   "fraud_prevention_section_header",
   "gov_ip_headers",
   "advanced_section",
-  "auth_base",
-  "api_base",
   "installation_guid"
  ],
  "fields": [
@@ -37,18 +37,6 @@
    "fieldtype": "Password",
    "is_virtual": 1,
    "label": "Client Secret"
-  },
-  {
-   "default": "https://www.tax.service.gov.uk",
-   "fieldname": "auth_base",
-   "fieldtype": "Data",
-   "label": "Authorisation Base URL"
-  },
-  {
-   "default": "https://api.service.hmrc.gov.uk",
-   "fieldname": "api_base",
-   "fieldtype": "Data",
-   "label": "API Base URL"
   },
   {
    "description": "This field is generated automatically upon save. Thereafter, it should not be changed, deleted or copied to a new installation.",
@@ -85,20 +73,32 @@
   {
    "fieldname": "connected_app",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Application",
-   "options": "Connected App"
+   "options": "Connected App",
+   "reqd": 1
   },
   {
    "description": "Created a Connected Application, enter the Client ID and Client Secret, and we will fill out the rest of the details.",
    "fieldname": "connected_application_section",
    "fieldtype": "Section Break",
    "label": "Connected Application"
+  },
+  {
+   "fieldname": "column_break_kxws",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_sandbox_app",
+   "fieldtype": "Check",
+   "label": "Is Sandbox App?"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-30 07:24:01.451303",
+ "modified": "2025-09-05 08:53:41.757729",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "HMRC API Settings",
