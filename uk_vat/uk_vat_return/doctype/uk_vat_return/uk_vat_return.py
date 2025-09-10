@@ -5,8 +5,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
-from frappe.utils import get_url, nowdate, date_diff, flt
-import json
+from frappe.utils import flt
 import uk_vat.uk_vat_return.hmrc_api.vat as vat_api
 import datetime
 
@@ -24,6 +23,39 @@ vat_return_schema = {
 }
 
 class UKVATReturn(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		amended_from: DF.Link | None
+		company: DF.Link
+		hmrc_charge_reference_number: DF.Data | None
+		hmrc_correlation_id: DF.Data | None
+		hmrc_form_bundle_number: DF.Data | None
+		hmrc_payment_indicator: DF.Data | None
+		hmrc_period_key: DF.Data | None
+		hmrc_processing_date: DF.Data | None
+		hmrc_receipt_id: DF.Data | None
+		hmrc_receipt_timestamp: DF.Data | None
+		hmrc_vrn: DF.Data | None
+		is_finalised: DF.Check
+		period_end_date: DF.Date
+		period_start_date: DF.Date
+		submitted_date: DF.Date | None
+		total_ec_goods_input: DF.Currency
+		total_ec_goods_output: DF.Currency
+		total_input_exvat: DF.Currency
+		total_output_exvat: DF.Currency
+		vat_due_total: DF.Currency
+		vat_eu_acquisitions: DF.Currency
+		vat_input: DF.Currency
+		vat_net: DF.Currency
+		vat_output: DF.Currency
+	# end: auto-generated types
 
 	def before_save(self):
 
