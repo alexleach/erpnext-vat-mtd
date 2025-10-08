@@ -30,7 +30,10 @@ class HMRCAPISettings(Document):
 	def validate(self):
 		"""Check that the Connected App's settings are correct"""
 		app = frappe.get_doc("Connected App", self.connected_app)
-		app.scopes = [{"scope": "read:vat"}, {"scope": "write:vat"}]
+		# Set the required VAT scopes
+		app.set("scopes", [])
+		app.append("scopes", {"scope": "read:vat"})
+		app.append("scopes", {"scope": "write:vat"})
 		domain = "api.service.hmrc.gov.uk"
 		if self.is_sandbox_app:
 			domain = "test-" + domain
