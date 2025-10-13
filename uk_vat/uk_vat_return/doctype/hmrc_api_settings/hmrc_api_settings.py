@@ -28,15 +28,25 @@ class HMRCAPISettings(Document):
 			self.installation_guid = str(uuid.uuid4())
 
 	def validate(self):
-		"""Check that the Connected App's settings are correct"""
-		app = frappe.get_doc("Connected App", self.connected_app)
-		app.scopes = [{"scope": "read:vat"}, {"scope": "write:vat"}]
-		domain = "api.service.hmrc.gov.uk"
-		if self.is_sandbox_app:
-			domain = "test-" + domain
-		app.authorisation_url = f"https://{domain}/oauth/authorize"
-		app.token_uri = f"https://{domain}/oauth/token"
-		app.save()
+	    """Check that the Connected App's settings are correct"""
+	    app = frappe.get_doc("Connected App", self.connected_app)
+	    
+	    # Clear existing scopes
+	    app.scopes = []
+	    
+	    # Add scopes as proper child table entries
+	    app.append("scopes", {"scope": "read:vat"})
+	    app.append("scopes", {"scope": "write:vat"})
+	    
+	    # Set domain based on sandbox setting
+	    domain = "api.service.hmrc.gov.uk"
+	    if self.is_sandbox_app:
+	        domain = "test-" + domain
+	    
+	    app.authorization_url = f"https://{domain}/oauth/authorize"
+	    app.token_uri = f"https://{domain}/oauth/token"
+	    
+	    app.save()
 
 	@frappe.whitelist()
 	def test_api(self):
