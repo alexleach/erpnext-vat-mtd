@@ -14,5 +14,17 @@ frappe.ui.form.on('HMRC API Settings', {
 			});
 		});
 
+	},
+
+	create_app: function(frm) {
+		frm.call({
+			method : "create_app",
+			doc: frm.doc,
+			callback : function(r){
+				frappe.msgprint("Connected App created/updated. Please update its Client ID and Secret.");
+				frm.reload_doc();
+			}
+		});
 	}
+
 });

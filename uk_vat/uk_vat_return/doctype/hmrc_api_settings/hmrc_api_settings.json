@@ -6,38 +6,16 @@
  "engine": "InnoDB",
  "field_order": [
   "connected_application_section",
-  "connected_app",
-  "column_break_kxws",
+  "create_app",
   "is_sandbox_app",
-  "oauth2_client_identifier_section",
-  "client_id",
-  "column_break_yaha",
-  "client_secret",
+  "column_break_kxws",
+  "connected_app",
   "fraud_prevention_section_header",
   "gov_ip_headers",
   "advanced_section",
   "installation_guid"
  ],
  "fields": [
-  {
-   "depends_on": "enable",
-   "description": "These are the Client ID and Secret received from the HMRC developer API team. It is not your government gateway identifier. Register your server application at https://developer.service.hmrc.gov.uk/developer/applications",
-   "fieldname": "oauth2_client_identifier_section",
-   "fieldtype": "Section Break",
-   "label": "OAUTH2 Client Identifier"
-  },
-  {
-   "fieldname": "client_id",
-   "fieldtype": "Data",
-   "is_virtual": 1,
-   "label": "Client Id"
-  },
-  {
-   "fieldname": "client_secret",
-   "fieldtype": "Password",
-   "is_virtual": 1,
-   "label": "Client Secret"
-  },
   {
    "description": "This field is generated automatically upon save. Thereafter, it should not be changed, deleted or copied to a new installation.",
    "fieldname": "installation_guid",
@@ -67,16 +45,11 @@
    "label": "HMRC Fraud Prevention Headers"
   },
   {
-   "fieldname": "column_break_yaha",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "connected_app",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Application",
-   "options": "Connected App",
-   "reqd": 1
+   "label": "Connected App",
+   "options": "Connected App"
   },
   {
    "description": "Created a Connected Application, enter the Client ID and Client Secret, and we will fill out the rest of the details.",
@@ -90,15 +63,22 @@
   },
   {
    "default": "0",
+   "description": "Sandbox apps are used for testing / development purposes only. Production apps should not check this box.",
    "fieldname": "is_sandbox_app",
    "fieldtype": "Check",
    "label": "Is Sandbox App?"
+  },
+  {
+   "fieldname": "create_app",
+   "fieldtype": "Button",
+   "label": "Create Connected App",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-09-05 08:53:41.757729",
+ "modified": "2025-10-08 13:10:12.736231",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "HMRC API Settings",
