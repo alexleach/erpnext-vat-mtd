@@ -39,6 +39,14 @@ class HMRCAPISettings(Document):
 		self.connected_app = app.name
 		self.save()
 
+	@property
+	def api_hostname(self):
+		"""Return the HMRC hostname, depending on whether this is a sandbox app or not."""
+		if self.is_sandbox_app:
+			return "test-api.service.hmrc.gov.uk"
+		else:
+			return "api.service.hmrc.gov.uk"
+
 	def update_app(self, app=None):
 		"""Update the Connected App with the required settings"""
 		if app is None:
@@ -48,11 +56,9 @@ class HMRCAPISettings(Document):
 		app.set("scopes", [])
 		app.append("scopes", {"scope": "read:vat"})
 		app.append("scopes", {"scope": "write:vat"})
-		domain = "api.service.hmrc.gov.uk"
-		if self.is_sandbox_app:
-			domain = "test-" + domain
-		app.authorization_uri = f"https://{domain}/oauth/authorize"
-		app.token_uri = f"https://{domain}/oauth/token"
+		# domain = self.get_hmrc_hostname()
+		app.authorization_uri = f"https://{self.api_hostname}/oauth/authorize"
+		app.token_uri = f"https://{self.api_hostname}/oauth/token"
 		app.save()
 		return app
 

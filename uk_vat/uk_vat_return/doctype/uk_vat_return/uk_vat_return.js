@@ -41,13 +41,15 @@ frappe.ui.form.on('UK VAT Return', {
 
 	fetch_returns_hmrc: function(frm) {
 
-		frappe.call({
-			"method" : "uk_vat.uk_vat_return.doctype.uk_vat_return.uk_vat_return.get_open_obligations",
+		frm.call({
+			method: "get_open_obligations",
+			doc: frm.doc,
 			"args" : {
-				company_name : frm.doc.company,
                 fraud_prevention: fraud_prevention_headers()
 			},
-			"callback" : function(r) {
+			freeze: true,
+			freeze_message: __('Fetching open obligations from HMRC'),
+			callback : function(r) {
 
 				let obligations = r.message;
 
@@ -99,12 +101,11 @@ frappe.ui.form.on('UK VAT Return', {
 			'Are you sure you would like to submit this VAT information?',
 			function(){
 
-				frappe.call({
-					"method" : "uk_vat.uk_vat_return.doctype.uk_vat_return.uk_vat_return.submit_vat_return",
+				frm.call({
+					method: "submit_vat_return",
+					doc: frm.doc,
 					"args" : {
-						name : frm.doc.name,
 						is_finalised: frm.doc.is_finalised,
-                        fraud_prevention: fraud_prevention_headers()
 					},
 					"callback" : function(r) {
 						frappe.msgprint("VAT return submitted to HMRC!");

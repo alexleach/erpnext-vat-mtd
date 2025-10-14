@@ -245,7 +245,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2020-04-15 19:26:23.905038",
+ "modified": "2025-08-31 21:14:01.944276",
  "modified_by": "Administrator",
  "module": "UK VAT Return",
  "name": "UK VAT Return",
@@ -280,7 +280,9 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
