@@ -18,7 +18,7 @@ def is_company_vat_enabled(company):
 
     return enabled_count > 0
 
-def get_vrn(company):
+def get_vrn(company: str) -> str:
     tax_id = frappe.db.get_value("Company", company, "tax_id")
     if not tax_id:
         link = get_link_to_form("Company", company)
@@ -67,3 +67,19 @@ def get_session(company: str):
         frappe.throw("No Connected App configured in HMRC API Settings")
     app = frappe.get_doc("Connected App", app_name)
     return app.get_oauth2_session(frappe.session.user)
+
+@frappe.whitelist()
+def mark_success(name: str):
+    """Mark the HMRC Authorisation as successful, after OAuth callback.
+    (Putting it in HMRC Authorisations doesn't work because of a VARCHAR limit
+    on Success URI.)
+    """
+    hmrc_auth = frappe.get_doc("HMRC Authorisations", name)
+    if hmrc_auth:
+        hmrc_auth.set("authorisation_status", "Authorised")
+        hmrc_auth.save()
+        frappe.db.commit()
+        frappe.local.response["type"] = "redirect"
+        frappe.local.response["location"] = hmrc_auth.get_url()
+    else:
+        frappe.throw("HMRC Authorisation not found")

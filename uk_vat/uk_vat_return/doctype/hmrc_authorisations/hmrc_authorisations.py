@@ -35,19 +35,6 @@ class HMRCAuthorisations(Document):
 	def get_success_url(self):
 		base_url = frappe.utils.get_url()
 		callback_path = (
-			"/api/method/uk_vat.uk_vat_return.doctype.hmrc_authorisations.hmrc_authorisations.mark_success?name=" + self.name
+			"/api/method/uk_vat.uk_vat_return.hmrc_api.vat.mark_success?name=" + self.name
 		)
 		return urljoin(base_url, callback_path)
-
-
-@frappe.whitelist()
-def mark_success(name: str):
-	hmrc_auth = frappe.get_doc("HMRC Authorisations", name)
-	if hmrc_auth:
-		hmrc_auth.set("authorisation_status", "Authorised")
-		hmrc_auth.save()
-		frappe.db.commit()
-		frappe.local.response["type"] = "redirect"
-		frappe.local.response["location"] = hmrc_auth.get_url()
-	else:
-		frappe.throw("HMRC Authorisation not found")
